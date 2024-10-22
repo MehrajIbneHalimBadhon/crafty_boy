@@ -1,4 +1,6 @@
 import 'package:crafty_boy_ecommerce_app/presentation/state_holders/bottom_nav_bar_controller.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/state_holders/category_list_controller.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/centered_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -18,9 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async{
-          return false;
-        },
+      onWillPop: () async {
+        return false;
+      },
       child: Scaffold(
         appBar: _buildAppBar(),
         body: SingleChildScrollView(
@@ -116,9 +118,16 @@ class _HomeScreenState extends State<HomeScreen> {
             Get.find<BottomNavBarController>().selectCategory();
           },
         ),
-        const SizedBox(
+        SizedBox(
           height: 120,
-          child: HorizontalCatagoryListView(),
+          child: GetBuilder<CategoryListController>(
+              builder: (categoryListController) {
+            return Visibility(
+              visible: !categoryListController.inProgress,
+              replacement: CenteredCircularProgressIndicator(),
+              child: HorizontalCatagoryListView(categoryList: categoryListController.categoryList,),
+            );
+          }),
         ),
       ],
     );

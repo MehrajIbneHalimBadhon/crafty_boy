@@ -37,7 +37,7 @@ class NetworkCaller {
         );
       }
     } catch (e) {
-      _responseLog(url, -1, {}, e, true, e);
+      _responseLog(url, -1, {}, e, false, e);
       return NetworkResponse(
         isSuccess: false,
         statusCode: -1,
@@ -77,7 +77,7 @@ class NetworkCaller {
         );
       }
     } catch (e) {
-      _responseLog(url, -1, {}, e, true, e);
+      _responseLog(url, -1, {}, e, false, e);
       return NetworkResponse(
         isSuccess: false,
         statusCode: -1,
@@ -93,7 +93,6 @@ class NetworkCaller {
     Params: $params,
     Body: $body,
     Token: $token
-    
     ''');
   }
 
