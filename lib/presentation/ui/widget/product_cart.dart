@@ -1,3 +1,4 @@
+import 'package:crafty_boy_ecommerce_app/data/models/product_model.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/product_detatils_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,24 +9,27 @@ import '../utils/assets_path.dart';
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
+    required this.product,
   });
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(()=>const ProductDetailsScreen());
+        Get.to(() => const ProductDetailsScreen());
       },
       child: Card(
         elevation: 3,
         color: Colors.white,
         child: SizedBox(
-          width: 120,
+          width: 160,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: 120,
+                width: 160,
                 height: 100,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -44,8 +48,8 @@ class ProductCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Product Name',
+                    Text(
+                      product.title ?? '',
                       maxLines: 1,
                       style: TextStyle(
                           fontWeight: FontWeight.w500, color: Colors.black54),
@@ -53,16 +57,18 @@ class ProductCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('\$120',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.themeColor)),
-                        const Wrap(
+                        Expanded(
+                          child: Text('\$${product.price}',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.themeColor)),
+                        ),
+                        Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             Icon(Icons.star, size: 16, color: Colors.amber),
                             Text(
-                              '3',
+                              '${product.star}',
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black54),

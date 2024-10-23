@@ -1,5 +1,7 @@
 import 'package:crafty_boy_ecommerce_app/presentation/state_holders/bottom_nav_bar_controller.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/state_holders/category_list_controller.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/state_holders/new_product_list_controller.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/state_holders/special_product_list_controller.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/cart_list_screen.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/catagory_list_screen.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/home_screen.dart';
@@ -7,6 +9,7 @@ import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/wish_list_scree
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../state_holders/popular_product_list_controller.dart';
 import '../../state_holders/slider_list_controller.dart';
 
 class MainBottomNavScreen extends StatefulWidget {
@@ -31,6 +34,9 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
 
     Get.find<SliderListController>().getSliderList();
     Get.find<CategoryListController>().getCategoryList();
+    Get.find<NewProductListController>().getNewProductList();
+    Get.find<PopularProductListController>().getPopularProductList();
+    Get.find<SpecialProductListController>().getSpecialProductList();
     super.initState();
   }
 
