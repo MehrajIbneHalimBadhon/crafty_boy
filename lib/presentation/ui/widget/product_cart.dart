@@ -18,7 +18,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => const ProductDetailsScreen());
+        Get.to(() =>  ProductDetailsScreen(productId: product.id!,));
       },
       child: Card(
         elevation: 3,
@@ -51,7 +51,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       product.title ?? '',
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.w500, color: Colors.black54),
                     ),
                     Row(
@@ -59,17 +59,17 @@ class ProductCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text('\$${product.price}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: AppColors.themeColor)),
                         ),
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Icon(Icons.star, size: 16, color: Colors.amber),
+                            const Icon(Icons.star, size: 16, color: Colors.amber),
                             Text(
                               '${product.star}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   color: Colors.black54),
                             ),

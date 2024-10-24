@@ -1,6 +1,5 @@
 import 'package:crafty_boy_ecommerce_app/data/models/category_model.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/product_list_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +17,7 @@ class CatagoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Get.to(
-          () =>  ProductListScreen(catagoryName: categoryModel.categoryName ?? ''),
+          () =>  ProductListScreen(catagory: categoryModel,),
         );
       },
       child: Column(
@@ -39,7 +38,7 @@ class CatagoryCard extends StatelessWidget {
           ),
            Text(
             categoryModel.categoryName ?? '',
-            style: TextStyle(color: AppColors.themeColor),
+            style: const TextStyle(color: AppColors.themeColor),
           )
         ],
       ),

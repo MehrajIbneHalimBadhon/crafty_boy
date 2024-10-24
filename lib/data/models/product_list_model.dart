@@ -1,7 +1,5 @@
-import 'package:crafty_boy_ecommerce_app/data/models/category_model.dart';
 import 'package:crafty_boy_ecommerce_app/data/models/product_model.dart';
 
-import 'brand_model.dart';
 
 class ProductListModel {
   String? msg;

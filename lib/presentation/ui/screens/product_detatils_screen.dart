@@ -1,13 +1,19 @@
+import 'package:crafty_boy_ecommerce_app/presentation/state_holders/product_details_controller.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/utils/app_colors.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/centered_circular_progress_indicator.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/product_image_slider.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/size_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
+import '../../../data/models/product_details_model.dart';
 import '../widget/color_picker.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.productId});
+
+  final int productId;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -15,42 +21,66 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
+  void initState() {
+    Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: _buildProductDetails(context),
-          ),
-          _buildPriceAndAddToCartSection()
-        ],
-      ),
+      body: GetBuilder<ProductDetailsController>(
+          builder: (productDetailsCorntroller) {
+        if (productDetailsCorntroller.inProgress) {
+          return const CenteredCircularProgressIndicator();
+        }
+        if (productDetailsCorntroller.errorMessage != null) {
+          return Center(
+            child: Text(productDetailsCorntroller.errorMessage!),
+          );
+        }
+        return Column(
+          children: [
+            Expanded(
+              child: _buildProductDetails(productDetailsCorntroller.product!),
+            ),
+            _buildPriceAndAddToCartSection(productDetailsCorntroller.product!)
+          ],
+        );
+      }),
     );
   }
 
-  Widget _buildProductDetails(BuildContext context) {
+  Widget _buildProductDetails(ProductDetailsModel product) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const ProductImageSlider(),
+          ProductImageSlider(
+            sliderUrls: [
+              product.img1!,
+              product.img2!,
+              product.img3!,
+              product.img4!
+            ],
+          ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildNameAndQuantitySection(context),
+                _buildNameAndQuantitySection(product),
                 const SizedBox(
                   height: 4,
                 ),
-                _buildRatingAndReviewSection(),
-                _buildColorAndSizePickerSection(),
+                _buildRatingAndReviewSection(product),
+                _buildColorAndSizePickerSection(product),
                 const SizedBox(
                   height: 16,
                 ),
-                _buildDescriptionSection(context)
+                _buildDescriptionSection(product)
               ],
             ),
           ),
@@ -59,7 +89,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildColorAndSizePickerSection() {
+  Widget _buildColorAndSizePickerSection(ProductDetailsModel product) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,20 +106,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           height: 16,
         ),
         SizePicker(
-          sizes: const [
-            'S',
-            'M',
-            'L',
-            'XL',
-            'XXL',
-          ],
+          sizes: product.size!.split(','),
           sizeSelected: (String selectedSize) {},
         ),
       ],
     );
   }
 
-  Widget _buildDescriptionSection(BuildContext context) {
+  Widget _buildDescriptionSection(ProductDetailsModel productDetails) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -100,8 +124,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         const SizedBox(
           height: 8,
         ),
-        const Text(
-          '''Item count number as a flutter package that allows you to easily implement a customable item count widget with increment and decrement buttons.Item count number as a flutter package that allows you to easily implement a customable item count widget with increment and decrement buttons.''',
+        Text(
+          productDetails.product?.shortDes ?? '',
           style: TextStyle(
             color: Colors.black45,
           ),
@@ -110,13 +134,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildNameAndQuantitySection(BuildContext context) {
+  Widget _buildNameAndQuantitySection(ProductDetailsModel productDetails) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
             child: Text(
-          "Nike show 2024 latest model - New Year Special Deal 10% discount",
+          productDetails.product?.title ?? '',
           style: Theme.of(context).textTheme.titleMedium,
         )),
         ItemCount(
@@ -131,16 +155,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildRatingAndReviewSection() {
+  Widget _buildRatingAndReviewSection(ProductDetailsModel productDetails) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        const Wrap(
+        Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             Icon(Icons.star, size: 16, color: Colors.amber),
             Text(
-              '3',
+              '${productDetails.product?.star ?? ''}',
               style:
                   TextStyle(fontWeight: FontWeight.w500, color: Colors.black54),
             ),
@@ -174,7 +198,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Widget _buildPriceAndAddToCartSection() {
+  Widget _buildPriceAndAddToCartSection(ProductDetailsModel productDetails) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -187,12 +211,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Price'),
               Text(
-                '\$100',
+                '\$${productDetails.product?.price ?? ''}',
                 style: TextStyle(
                     color: AppColors.themeColor,
                     fontSize: 18,

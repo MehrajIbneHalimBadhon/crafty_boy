@@ -34,7 +34,7 @@ class _CatagoryListScreenState extends State<CatagoryListScreen> {
           child: GetBuilder<CategoryListController>(
               builder: (categoryListController) {
             if (categoryListController.inProgress) {
-              return CenteredCircularProgressIndicator();
+              return const CenteredCircularProgressIndicator();
             } else if (categoryListController.errorMessage != null) {
               return Center(
                 child: Text(categoryListController.errorMessage!),

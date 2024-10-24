@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (popularProductListController) {
             return Visibility(
               visible: !popularProductListController.inProgress,
-              replacement: CenteredCircularProgressIndicator(),
+              replacement: const CenteredCircularProgressIndicator(),
               child: HorizontalProductListView(
                 productList: popularProductListController.productList,
               ),
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (newProductListController) {
             return Visibility(
               visible: !newProductListController.inProgress,
-              replacement: CenteredCircularProgressIndicator(),
+              replacement: const CenteredCircularProgressIndicator(),
               child: HorizontalProductListView(
                 productList: newProductListController.productList,
               ),
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (specialProductListController) {
             return Visibility(
               visible: !specialProductListController.inProgress,
-              replacement: CenteredCircularProgressIndicator(),
+              replacement: const CenteredCircularProgressIndicator(),
               child: HorizontalProductListView(
                 productList: specialProductListController.productList,
               ),
@@ -156,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (categoryListController) {
             return Visibility(
               visible: !categoryListController.inProgress,
-              replacement: CenteredCircularProgressIndicator(),
+              replacement: const CenteredCircularProgressIndicator(),
               child: HorizontalCatagoryListView(
                 categoryList: categoryListController.categoryList,
               ),

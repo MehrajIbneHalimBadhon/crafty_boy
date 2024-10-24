@@ -52,9 +52,9 @@ class ProductModel {
     brandId = json['brand_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    brand = json['brand'] != null ? new BrandModel.fromJson(json['brand']) : null;
+    brand = json['brand'] != null ? BrandModel.fromJson(json['brand']) : null;
     category = json['category'] != null
-        ? new CategoryModel.fromJson(json['category'])
+        ? CategoryModel.fromJson(json['category'])
         : null;
   }
 
