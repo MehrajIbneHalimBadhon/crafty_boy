@@ -38,8 +38,8 @@ class ProductCard extends StatelessWidget {
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
                   ),
-                  image: const DecorationImage(
-                      image: AssetImage(AssetsPath.dummyProductImage),
+                  image:  DecorationImage(
+                      image: NetworkImage(product.image ?? ''),
                       fit: BoxFit.scaleDown),
                 ),
               ),

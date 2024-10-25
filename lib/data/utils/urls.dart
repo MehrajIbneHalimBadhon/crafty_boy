@@ -7,4 +7,6 @@ class Urls {
   static String productListByRemark(String remark) => "$_baseurl/ListProductByRemark/$remark";
   static String productListByCategory(int categoryId) => "$_baseurl/ListProductByCategory/$categoryId";
   static String productDetailsById(int productId) => "$_baseurl/ProductDetailsById/$productId";
+  static String verifyEmail(String email) => "$_baseurl/UserLogin/$email";
+  static String verifyOTP(String email,String otp) => "$_baseurl/VerifyLogin/$email/$otp";
 }

@@ -1,7 +1,7 @@
 import 'package:crafty_boy_ecommerce_app/data/models/category_model.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/state_holders/product_list_by_category_controller.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/centered_circular_progress_indicator.dart';
-import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/product_cart.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

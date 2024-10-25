@@ -1,4 +1,4 @@
-import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/product_cart.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/product_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../data/models/product_model.dart';
