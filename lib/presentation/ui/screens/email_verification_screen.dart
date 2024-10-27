@@ -1,6 +1,5 @@
 import 'package:crafty_boy_ecommerce_app/presentation/state_holders/email_verification_controller.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/otp_verification_screen.dart';
-import 'package:crafty_boy_ecommerce_app/presentation/ui/utils/snack_message.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/app_logo_widget.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/centered_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +75,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 GetBuilder<EmailVerificationController>(builder: (emailVerificationController) {
                   return Visibility(
                     visible: !emailVerificationController.inProgress,
-                    replacement: CenteredCircularProgressIndicator(),
+                    replacement: const CenteredCircularProgressIndicator(),
                     child: ElevatedButton(
                       onPressed: _onTapNextScreen,
                       child: const Text('Next'),
@@ -99,13 +98,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
         .verifyEmail(_emailTEController.text.trim());
     if (result) {
       Get.to(() => OtpVerificationScreen(email: _emailTEController.text.trim(),),);
-    } else {
-      //show error message
-      if (mounted) {
-        showSnackBarMessage(
-            context,
-            _emailVerificationController.errorMessage!, true);
-      }
     }
     Get.to(() =>  OtpVerificationScreen(email: _emailTEController.text.trim(),),);
   }

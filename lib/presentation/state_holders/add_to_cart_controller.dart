@@ -3,28 +3,30 @@ import 'package:crafty_boy_ecommerce_app/data/services/network_caller.dart';
 import 'package:crafty_boy_ecommerce_app/data/utils/urls.dart';
 import 'package:get/get.dart';
 
-class OTPVerificationController extends GetxController {
+class AddToCartController extends GetxController {
   bool _inProgress = false;
-  String _accessToken = "";
-
-  String get accessToken => _accessToken;
 
   bool get inProgress => _inProgress;
   String? _errorMessage;
 
   String? get errorMessage => _errorMessage;
 
-  Future<bool> verifyOTP(String email, String otp) async {
+  Future<bool> addToCart(
+      int productId, String color, String size, int quantity) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
 
     final NetworkResponse response = await Get.find<NetworkCaller>()
-        .getRequest(url: Urls.verifyOTP(email, otp));
+        .postRequest(url: Urls.addToCart, body: {
+      "product_id": productId,
+      "color": color,
+      "size": size,
+      "qty": quantity
+    });
 
-    if (response.isSuccess && response.responseData['msg'] == 'success') {
+    if (response.isSuccess && response.responseData['mesg'] == 'success') {
       _errorMessage = null;
-      _accessToken = response.responseData['data'];
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

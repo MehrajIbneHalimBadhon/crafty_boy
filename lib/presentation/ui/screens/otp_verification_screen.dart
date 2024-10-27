@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:crafty_boy_ecommerce_app/presentation/state_holders/otp_verification_controller.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/state_holders/read_profile_controller.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/complete_profile_screen.dart';
+import 'package:crafty_boy_ecommerce_app/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/utils/app_colors.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/utils/snack_message.dart';
 import 'package:crafty_boy_ecommerce_app/presentation/ui/widget/app_logo_widget.dart';
@@ -23,6 +25,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   final TextEditingController _otpTEController = TextEditingController();
   final OTPVerificationController _otpTEVeryficationController =
       Get.find<OTPVerificationController>();
+  final ReadProfileController _readProfileController = Get.find<ReadProfileController>();
+
   Timer? _timer;
   int _start = 120;
 
@@ -107,7 +111,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   builder: (otpVerificationController) {
                 return Visibility(
                   visible: !otpVerificationController.inProgress,
-                  replacement: CenteredCircularProgressIndicator(),
+                  replacement: const CenteredCircularProgressIndicator(),
                   child: ElevatedButton(
                     onPressed: _onTapNextScreen,
                     child: const Text('Next'),
@@ -159,10 +163,33 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   Future<void> _onTapNextScreen() async {
     bool result = await _otpTEVeryficationController.verifyOTP(
         widget.email, _otpTEController.text);
-    if (result) {Get.to(() => const CompleteProfileScreen());}
-    else{
-      if(mounted){
-        showSnackBarMessage(context, _otpTEVeryficationController.errorMessage!);
+
+
+    if (result) {
+
+      final bool readProfileResult = await _readProfileController
+          .getProfileDetails(_otpTEVeryficationController.accessToken);
+
+      if (readProfileResult) {
+
+        if (_readProfileController.isProfileCompleted)
+        {
+          Get.offAll(() => const MainBottomNavScreen());
+        }
+
+        else {
+          Get.to(() => const CompleteProfileScreen());
+        }
+
+      }
+    }
+
+    else {
+
+      if (mounted) {
+
+        showSnackBarMessage(
+            context, _otpTEVeryficationController.errorMessage!);
       }
     }
   }
