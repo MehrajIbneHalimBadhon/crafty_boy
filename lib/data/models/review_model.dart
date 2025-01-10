@@ -1,5 +1,5 @@
 
-import 'package:crafty_boy_ecommerce_app/data/models/review_profile_model.dart';
+import 'package:crafty_boy_ecommerce_app/data/models/review_profile_data_model.dart';
 
 class ReviewModel {
   int? id;
@@ -13,13 +13,13 @@ class ReviewModel {
 
   ReviewModel(
       {this.id,
-        this.description,
-        this.rating,
-        this.customerId,
-        this.productId,
-        this.createdAt,
-        this.updatedAt,
-        this.profile});
+      this.description,
+      this.rating,
+      this.customerId,
+      this.productId,
+      this.createdAt,
+      this.updatedAt,
+      this.profile});
 
   ReviewModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

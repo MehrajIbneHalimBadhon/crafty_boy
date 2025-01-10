@@ -1,3 +1,4 @@
+
 import 'package:crafty_boy_ecommerce_app/data/models/product_model.dart';
 
 class CartModel {
@@ -14,15 +15,15 @@ class CartModel {
 
   CartModel(
       {this.id,
-        this.userId,
-        this.productId,
-        this.color,
-        this.size,
-        this.qty,
-        this.price,
-        this.createdAt,
-        this.updatedAt,
-        this.product});
+      this.userId,
+      this.productId,
+      this.color,
+      this.size,
+      this.qty,
+      this.price,
+      this.createdAt,
+      this.updatedAt,
+      this.product});
 
   CartModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,6 +36,6 @@ class CartModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     product =
-    json['product'] != null ? ProductModel.fromJson(json['product']) : null;
+        json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 }

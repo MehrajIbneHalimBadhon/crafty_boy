@@ -1,4 +1,5 @@
-import 'package:crafty_boy_ecommerce_app/data/models/category_model.dart';
+
+import 'category_model.dart';
 
 class CategoryListModel {
   String? msg;
@@ -15,8 +16,4 @@ class CategoryListModel {
       });
     }
   }
-
-
 }
-
-

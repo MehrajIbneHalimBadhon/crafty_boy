@@ -1,18 +1,18 @@
 import 'package:get/get.dart';
 
-class BottomNavBarController extends GetxController{
-  int _selectedIndex = 0 ;
+class BottomNavBarController extends GetxController {
+  int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
-  void changeIndex(int index){
+  void changeIndex(int index) {
     _selectedIndex = index;
     update();
   }
 
-  void selectCategory(){
+  void selectCategory() {
     changeIndex(1);
   }
 
-  void backToHome(){
+  void backToHome() {
     changeIndex(0);
   }
 }

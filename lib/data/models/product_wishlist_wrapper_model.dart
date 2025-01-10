@@ -1,5 +1,4 @@
 
-
 import 'package:crafty_boy_ecommerce_app/data/models/wishlist_model.dart';
 
 class ProductWishListWrapperModel {

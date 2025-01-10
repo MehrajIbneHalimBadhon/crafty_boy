@@ -11,11 +11,11 @@ class WishListModel {
 
   WishListModel(
       {this.id,
-        this.productId,
-        this.userId,
-        this.createdAt,
-        this.updatedAt,
-        this.product});
+      this.productId,
+      this.userId,
+      this.createdAt,
+      this.updatedAt,
+      this.product});
 
   WishListModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

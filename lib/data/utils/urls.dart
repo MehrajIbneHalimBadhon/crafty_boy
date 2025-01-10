@@ -1,37 +1,37 @@
 class Urls {
-  static const String _baseurl = "https://ecommerce-api.codesilicon.com/api";
-  static const String dummyUrl = "$_baseurl/login";
-  static const String sliderListUrl = "$_baseurl/ListProductSlider";
-  static const String categoryListUrl = "$_baseurl/CategoryList";
-  static const String readProfile = "$_baseurl/ReadProfile";
-  static const String addToCart = "$_baseurl/CreateCartList";
-  static const String createProfile = "$_baseurl/CreateProfile";
+  static const String _baseUrl = 'https://ecommerce-api.codesilicon.com/api';
 
-  static const String createProductReviewUrl = '$_baseurl/CreateProductReview';
-  static const String logoutUrl = '$_baseurl/logout';
-  static const String productWishListUrl = '$_baseurl/ProductWishList';
-  static const String cartListUrl = '$_baseurl/CartList';
+  static const String homeSliderListUrl = '$_baseUrl/ListProductSlider';
+  static const String categoryListUrl = '$_baseUrl/CategoryList';
+  static const String readUserProfileUrl = '$_baseUrl/ReadProfile';
+  static const String addToCartUrl = '$_baseUrl/CreateCartList';
+  static const String cartListUrl = '$_baseUrl/CartList';
+  static String removeCartUrl(String productId) => '$_baseUrl/DeleteCartList/$productId';
+  static const String createProfileUrl = '$_baseUrl/CreateProfile';
+  static const String createProductReviewUrl = '$_baseUrl/CreateProductReview';
+  static const String logoutUrl = '$_baseUrl/logout';
+  static const String productWishListUrl = '$_baseUrl/ProductWishList';
 
-  static String productListByRemark(String remark) =>
-      "$_baseurl/ListProductByRemark/$remark";
+  static String productListByRemark({required String remark}) =>
+      '$_baseUrl/ListProductByRemark/$remark';
 
-  static String productListByCategory(int categoryId) =>
-      "$_baseurl/ListProductByCategory/$categoryId";
+  static String categoryListById({required int categoryId}) =>
+      '$_baseUrl/ListProductByCategory/$categoryId';
 
-  static String productDetailsById(int productId) =>
-      "$_baseurl/ProductDetailsById/$productId";
+  static String productDetailsById({required int productId}) =>
+      '$_baseUrl/ProductDetailsById/$productId';
 
-  static String verifyEmail(String email) => "$_baseurl/UserLogin/$email";
+  static String verifyUserLogin({required String email}) =>
+      '$_baseUrl/UserLogin/$email';
 
-  static String verifyOTP(String email, String otp) =>
-      "$_baseurl/VerifyLogin/$email/$otp";
-
+  static String verifyOTP({required String email, required String otp}) =>
+      '$_baseUrl/VerifyLogin/$email/$otp';
   static String getReviewList({required int productId}) =>
-      '$_baseurl/ListReviewByProduct/$productId';
+      '$_baseUrl/ListReviewByProduct/$productId';
 
   static String removeWishListUrl({required int productId}) =>
-      '$_baseurl/RemoveWishList/$productId';
+      '$_baseUrl/RemoveWishList/$productId';
 
   static String createWishListUrl({required int productId}) =>
-      '$_baseurl/CreateWishList/$productId';
+      '$_baseUrl/CreateWishList/$productId';
 }

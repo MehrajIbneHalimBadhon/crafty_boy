@@ -7,10 +7,10 @@ class CategoryModel {
 
   CategoryModel(
       {this.id,
-        this.categoryName,
-        this.categoryImg,
-        this.createdAt,
-        this.updatedAt});
+      this.categoryName,
+      this.categoryImg,
+      this.createdAt,
+      this.updatedAt});
 
   CategoryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -19,6 +19,4 @@ class CategoryModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
-
-
 }

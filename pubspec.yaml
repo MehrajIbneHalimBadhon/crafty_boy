@@ -43,6 +43,8 @@ dependencies:
   http: ^1.1.0
   logger: ^2.4.0
   shared_preferences: ^2.2.3
+  flutter_sslcommerz: ^2.3.9
+  fluttertoast: ^8.2.5
 
 dev_dependencies:
   flutter_test:
